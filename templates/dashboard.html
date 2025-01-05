@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% block content %}
+
+  <h1 class=" my-5">Hello</h1>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Image</th>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Price</th>
+        <th scope="col">Qauntity</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+
+      
+      {% for product in products %}
+        <tr>
+          <th scope="row">{{ product.id }}</th>
+          <td>
+            
+            {% if product.img %}
+              <img src="{{ product.img }}" alt="" width="150">
+            {% endif %}
+              
+          </td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.description }}</td>
+          <td>{{ product.price }}</td>
+          <td>{{ product.qty }}</td>
+          <td>
+            <a href="{{ url_for('edit_product', id = product.id)  }}" class=" btn btn-warning">Edit</a>
+            <form action="{{ url_for('delete_product', id = product.id) }}" method="POST" style="display: inline;">
+              <button class=" btn btn-danger">Delete</button>
+            </form>
+          </td>
+
+        </tr>
+      {% endfor %}
+        
+
+      
+    </tbody>
+  </table>
+
+{% endblock content %}
